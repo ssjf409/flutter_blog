@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class CustomElvatedButton extends StatelessWidget {
   final String text;
-  final pageRoute;
+  final funPageRoute;
 
-  const CustomElvatedButton({@required this.text, @required this.pageRoute});
+  const CustomElvatedButton({@required this.text, @required this.funPageRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class CustomElvatedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      onPressed: pageRoute,
+      onPressed: funPageRoute,
       child: Text('$text'),
     );
   }
