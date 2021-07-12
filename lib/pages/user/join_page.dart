@@ -14,7 +14,7 @@ class JoinPage extends StatelessWidget {
               alignment: Alignment.center,
               height: 200,
               child: Text(
-                '회원가입 화면',
+                '회원가입 페이지',
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -33,13 +33,13 @@ class JoinPage extends StatelessWidget {
       child: Column(
         children: [
           CustomTextFormField(
-            hint: 'Enter username',
+            hint: 'username',
           ),
           CustomTextFormField(
-            hint: 'Enter password',
+            hint: 'password',
           ),
           CustomTextFormField(
-            hint: 'Enter email',
+            hint: 'email',
           ),
           CustomElvatedButton(
             text: '회원가입',
