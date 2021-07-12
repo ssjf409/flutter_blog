@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/components/custom_elevated_button.dart';
 import 'package:flutter_blog/components/custom_text_form_field.dart';
 import 'package:flutter_blog/pages/post/home_page.dart';
+import 'package:flutter_blog/util/validator_util.dart';
 import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
@@ -39,15 +40,19 @@ class LoginPage extends StatelessWidget {
         children: [
           CustomTextFormField(
             hint: 'username',
-            funValidator: (value) {},
+            funValidator: validateUsername(),
           ),
           CustomTextFormField(
             hint: 'password',
-            funValidator: (value) {},
+            funValidator: validatePassword(),
           ),
           CustomElvatedButton(
             text: '로그인',
-            funPageRoute: () => Get.to(HomePage()),
+            funPageRoute: () {
+              if (_formKey.currentState.validate()) {
+                Get.to(HomePage());
+              }
+            },
           ),
         ],
       ),
