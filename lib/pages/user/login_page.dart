@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/components/custom_elevated_button.dart';
 import 'package:flutter_blog/components/custom_text_form_field.dart';
+import 'package:flutter_blog/pages/post/home_page.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -40,6 +42,7 @@ class LoginPage extends StatelessWidget {
           ),
           CustomElvatedButton(
             text: '로그인',
+            pageRoute: () => Get.to(HomePage()),
           ),
         ],
       ),
