@@ -2,6 +2,7 @@
     package="com.jdh.flutter_blog">
    <application
         android:label="flutter_blog"
+       android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
