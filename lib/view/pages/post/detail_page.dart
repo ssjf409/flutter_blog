@@ -27,7 +27,7 @@ class DetailPage extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Get.off(HomePage()); // 상태관리로 갱신 시킬 수 있음.
+                    Get.off(() => HomePage()); // 상태관리로 갱신 시킬 수 있음.
                   },
                   child: Text('삭제'),
                 ),
@@ -36,7 +36,7 @@ class DetailPage extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Get.to(UpdatePage());
+                    Get.to(() => UpdatePage());
                   },
                   child: Text('수정'),
                 ),

@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
         itemBuilder: (context, index) {
           return ListTile(
             onTap: () {
-              Get.to(DetailPage(index), arguments: 'arguments 속성 테스트');
+              Get.to(() => DetailPage(index), arguments: 'arguments 속성 테스트');
             },
             title: Text('제목'),
             leading: Text('1'),
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  Get.to(WritePage());
+                  Get.to(() => WritePage());
                 },
                 child: Text(
                   '글쓰기',
@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
               Divider(),
               TextButton(
                 onPressed: () {
-                  Get.to(UserInfo());
+                  Get.to(() => UserInfo());
                 },
                 child: Text(
                   '회원정보보기',
@@ -71,7 +71,7 @@ class HomePage extends StatelessWidget {
               Divider(),
               TextButton(
                 onPressed: () {
-                  Get.to(LoginPage());
+                  Get.to(() => LoginPage());
                 },
                 child: Text(
                   '로그아웃',

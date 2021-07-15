@@ -8,6 +8,11 @@ class UserRepository {
     var loginReqDto = LoginReqDto(username, password);
     var response = await _userProvider.login(loginReqDto.toJson());
     var headers = response.headers;
+
+    if (headers['authorization'] == null) {
+      return '-1';
+    }
+
     String token = headers['authorization'];
     return token;
   }
