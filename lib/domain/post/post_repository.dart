@@ -6,6 +6,20 @@ import 'package:flutter_blog/util/convert_utf8.dart';
 class PostRepository {
   final PostProvider _postProvider = PostProvider();
 
+  Future<Post> findById(int id) async {
+    var response = await _postProvider.findById(id);
+    dynamic body = response.body;
+    var convertBody = Utf8Converter.convert(body);
+    CMResDto cmResDto = CMResDto.fromJson(convertBody);
+
+    if (cmResDto.code == 1) {
+      Post post = Post.fromJson(cmResDto.data);
+      return post;
+    } else {
+      return Post();
+    }
+  }
+
   Future<List<Post>> fetch() async {
     var response = await _postProvider.fetch();
     dynamic body = response.body;

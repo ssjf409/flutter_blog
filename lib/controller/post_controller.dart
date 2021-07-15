@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 class PostController extends GetxController {
   final PostRepository _postRepository = PostRepository();
   final posts = <Post>[].obs;
+  final post = Post().obs;
 
   @override
   void onInit() {
@@ -15,5 +16,10 @@ class PostController extends GetxController {
   Future<void> fetch() async {
     var posts = await _postRepository.fetch();
     this.posts.value = posts;
+  }
+
+  Future<Post> findById(int id) async {
+    var post = await _postRepository.findById(id);
+    this.post.value = post;
   }
 }

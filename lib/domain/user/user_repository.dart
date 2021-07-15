@@ -8,6 +8,8 @@ class UserRepository {
     var loginReqDto = LoginReqDto(username, password);
     var response = await _userProvider.login(loginReqDto.toJson());
     var headers = response.headers;
+    var body = response.body;
+    print('사용자 정보 : $body');
 
     if (headers['authorization'] == null) {
       return '-1';
