@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/controller/post_controller.dart';
 import 'package:flutter_blog/controller/user_controller.dart';
 import 'package:flutter_blog/size.dart';
 import 'package:flutter_blog/view/pages/post/detail_page.dart';
@@ -12,31 +13,38 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // put 없으면 만들고, 있으면 찾기!!
     UserController u = Get.find();
+    // 객체 생성(create) onInit 함수 실행 (initialize)
+    PostController p = Get.put(PostController());
+    // p.fetch();
 
     return Scaffold(
       drawer: _navigation(context),
       appBar: AppBar(
         title: Text('${u.isLogin}'),
       ),
-      body: ListView.separated(
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return ListTile(
-            onTap: () {
-              Get.to(() => DetailPage(index), arguments: 'arguments 속성 테스트');
-            },
-            title: Text('제목'),
-            leading: Text('1'),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider();
-        },
+      body: Obx(
+        () => ListView.separated(
+          itemCount: p.posts.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              onTap: () {
+                Get.to(() => DetailPage(index), arguments: 'arguments 속성 테스트');
+              },
+              title: Text('${p.posts[index].title}'),
+              leading: Text('${p.posts[index].id}'),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return Divider();
+          },
+        ),
       ),
     );
   }
 
   Widget _navigation(BuildContext context) {
+    UserController u = Get.find();
+
     return Container(
       width: getDrawerWidth(context),
       height: double.infinity,
@@ -77,6 +85,7 @@ class HomePage extends StatelessWidget {
               Divider(),
               TextButton(
                 onPressed: () {
+                  u.logout();
                   Get.to(() => LoginPage());
                 },
                 child: Text(
