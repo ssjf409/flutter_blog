@@ -36,8 +36,9 @@ class DetailPage extends StatelessWidget {
                   ? Row(
                       children: [
                         ElevatedButton(
-                          onPressed: () {
-                            Get.off(() => HomePage()); // 상태관리로 갱신 시킬 수 있음.
+                          onPressed: () async {
+                            await p.deleteById(p.post.value.id);
+                            await Get.off(() => HomePage()); // 상태관리로 갱신 시킬 수 있음.
                           },
                           child: Text('삭제'),
                         ),

@@ -11,6 +11,8 @@ class UserController extends GetxController {
   void logout() {
     this.isLogin.value = false;
     jwtToken = null;
+    // Get_storage()
+    // shared preference.
   }
 
   Future<int> login(String username, String password) async {
