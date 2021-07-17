@@ -2,7 +2,7 @@ import 'package:flutter_blog/controller/dto/cm_res_dto.dart';
 import 'package:flutter_blog/controller/dto/update_req_dto.dart';
 import 'package:flutter_blog/domain/post/post.dart';
 import 'package:flutter_blog/domain/post/post_provider.dart';
-import 'package:flutter_blog/util/convert_utf8.dart';
+import 'package:flutter_blog/util/utf8_converter.dart';
 import 'package:get/get.dart';
 
 class PostRepository {
@@ -21,6 +21,23 @@ class PostRepository {
       return post;
     } else {
       print('수정 실패');
+      return Post();
+    }
+  }
+
+  Future<Post> save(String title, String content) async {
+    UpdateReqDto updateReqDto = UpdateReqDto(title, content);
+    Response response = await _postProvider.save(updateReqDto.toJson());
+    dynamic body = response.body;
+    dynamic convertBody = Utf8Converter.convert(body);
+    CMResDto cmResDto = CMResDto.fromJson(convertBody);
+
+    if (cmResDto.code == 1) {
+      print('글쓰기 성공');
+      Post post = Post.fromJson(cmResDto.data);
+      return post;
+    } else {
+      print('글쓰기 실패');
       return Post();
     }
   }

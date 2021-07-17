@@ -9,6 +9,9 @@ import 'package:flutter_blog/view/pages/user/user_info.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     // put 없으면 만들고, 있으면 찾기!!
@@ -18,29 +21,46 @@ class HomePage extends StatelessWidget {
     // p.fetch();
 
     return Scaffold(
+      key: scaffoldKey,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          if (scaffoldKey.currentState.isDrawerOpen) {
+            scaffoldKey.currentState.openEndDrawer();
+          } else {
+            scaffoldKey.currentState.openDrawer();
+          }
+        },
+        child: Icon(Icons.code),
+      ),
       drawer: _navigation(context),
       appBar: AppBar(
         title: Text('${u.isLogin}'),
       ),
       body: Obx(
-        () => ListView.separated(
-          itemCount: p.posts.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              onTap: () async {
-                await p.findById(p.posts[index].id);
-                await Get.to(
-                  () => DetailPage(p.posts[index].id),
-                  arguments: 'arguments 속성 테스트',
-                );
-              },
-              title: Text('${p.posts[index].title}'),
-              leading: Text('${p.posts[index].id}'),
-            );
+        () => RefreshIndicator(
+          key: refreshKey,
+          onRefresh: () async {
+            await p.fetch();
           },
-          separatorBuilder: (BuildContext context, int index) {
-            return Divider();
-          },
+          child: ListView.separated(
+            itemCount: p.posts.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                onTap: () async {
+                  await p.findById(p.posts[index].id);
+                  await Get.to(
+                    () => DetailPage(p.posts[index].id),
+                    arguments: 'arguments 속성 테스트',
+                  );
+                },
+                title: Text('${p.posts[index].title}'),
+                leading: Text('${p.posts[index].id}'),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return Divider();
+            },
+          ),
         ),
       ),
     );
@@ -75,6 +95,7 @@ class HomePage extends StatelessWidget {
               Divider(),
               TextButton(
                 onPressed: () {
+                  scaffoldKey.currentState.openEndDrawer();
                   Get.to(() => UserInfo());
                 },
                 child: Text(

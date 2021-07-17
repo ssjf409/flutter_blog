@@ -2,8 +2,8 @@ import 'package:flutter_blog/controller/dto/cm_res_dto.dart';
 import 'package:flutter_blog/controller/dto/login_req_dto.dart';
 import 'package:flutter_blog/domain/user/user.dart';
 import 'package:flutter_blog/domain/user/user_provider.dart';
-import 'package:flutter_blog/util/convert_utf8.dart';
 import 'package:flutter_blog/util/jwt.dart';
+import 'package:flutter_blog/util/utf8_converter.dart';
 
 class UserRepository {
   final UserProvider _userProvider = UserProvider();
