@@ -16,7 +16,7 @@ class DetailPage extends StatelessWidget {
 
     UserController u = Get.find();
     PostController p = Get.find();
-
+    print('로그인 유저 아이디 : ${u.principal.value.id}');
     return Scaffold(
       appBar: AppBar(
         title: Text('게시글 아이디 : $id, 로그인 상태 : ${u.isLogin}'),
